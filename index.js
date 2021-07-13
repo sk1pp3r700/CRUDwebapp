@@ -27,10 +27,11 @@ let newFriend = {
 
 
 
+
 //GET-SPECIFIC
-app.get('/friend/:id', (req, res) =>{
-    let friendId = Number(req.params.id);
-    let getFriend = friend.find((friend) => friend.id === friendId);
+app.get("/friend/:id", (req, res) =>{
+    const {id} = req.params;
+    getFriend = friend.find((friend) => friend.id === Number(id));
 //send back an error message if the Friend id is not found
     if(!getFriend){
         res.status(404).send(`Cannot find friend with id of ${friendId}`);
@@ -38,6 +39,25 @@ app.get('/friend/:id', (req, res) =>{
         res.json(getFriend);
     }});
 
+
+//DELETE
+// app.delete("/products/:id", (req, res) => {
+//     const { id } = req.params;
+// // find product by id
+// const deleteProduct = Products.find((product) => product.id === Number(id));
+// if (!deleteProduct) {
+// return res
+//             .status(404)
+//             .json({ success: false, msg: `No product with id ${id}.` });
+//         }
+// // create new array with all products except the specified product
+// Products = Products.filter((product) => product.id !== Number(id));
+// return res.status(200).json({
+// success: true,
+// msg: `Product ${id} has been deleted.`,
+// data: Products,
+// });
+// });
 
     
 app.listen(port, () => {
